@@ -30,7 +30,7 @@ interface RouteParams {
 
 interface Point {
     name: string;
-    image: string;
+    image_url: string;
     email: string;
     whatsapp: string;
     city: string;
@@ -43,7 +43,7 @@ interface Point {
 const Detail: React.FC = () => {
     const [point, setPoint] = useState<Point>({
         name: '',
-        image: '',
+        image_url: '',
         email: '',
         whatsapp: '',
         city: '',
@@ -102,7 +102,7 @@ const Detail: React.FC = () => {
 
                 <PointImage
                     source={{
-                        uri: point.image,
+                        uri: point.image_url.replace('localhost', '10.0.2.2'),
                     }}
                 />
 

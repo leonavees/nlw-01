@@ -45,7 +45,7 @@ interface Item {
 interface Point {
     id: number;
     name: string;
-    image: string;
+    image_url: string;
     latitude: number;
     longitude: number;
 }
@@ -55,8 +55,8 @@ const longitudeDelta = 0.014;
 
 const Points: React.FC = () => {
     const [initialPosition, setInitialPosition] = useState<InitialPosition>({
-        latitude: -21.2458075,
-        longitude: -44.9948543,
+        latitude: 0,
+        longitude: 0,
         latitudeDelta,
         longitudeDelta,
     });
@@ -69,46 +69,46 @@ const Points: React.FC = () => {
     const route = useRoute();
     const routeParams = route.params as RouteParams;
 
-    // useEffect(() => {
-    //     async function loadPosition() {
-    //         const status = await PermissionsAndroid.requestMultiple([
-    //             'android.permission.ACCESS_COARSE_LOCATION',
-    //             'android.permission.ACCESS_FINE_LOCATION',
-    //         ]);
+    useEffect(() => {
+        async function loadPosition() {
+            const status = await PermissionsAndroid.requestMultiple([
+                'android.permission.ACCESS_COARSE_LOCATION',
+                'android.permission.ACCESS_FINE_LOCATION',
+            ]);
 
-    //         if (
-    //             status['android.permission.ACCESS_COARSE_LOCATION'] !==
-    //                 'granted' ||
-    //             status['android.permission.ACCESS_FINE_LOCATION'] !== 'granted'
-    //         ) {
-    //             Alert.alert(
-    //                 'Precisamos de sua permissão para obter a localização'
-    //             );
-    //             return;
-    //         }
+            if (
+                status['android.permission.ACCESS_COARSE_LOCATION'] !==
+                    'granted' ||
+                status['android.permission.ACCESS_FINE_LOCATION'] !== 'granted'
+            ) {
+                Alert.alert(
+                    'Precisamos de sua permissão para obter a localização'
+                );
+                return;
+            }
 
-    //         Location.getCurrentPosition(
-    //             position => {
-    //                 const { latitude, longitude } = position.coords;
+            Location.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
 
-    //                 setInitialPosition({
-    //                     latitude,
-    //                     longitude,
-    //                     latitudeDelta,
-    //                     longitudeDelta,
-    //                 });
-    //             },
-    //             () => {
-    //                 Alert.alert(
-    //                     'Erro inesperado ao tentar obter sua localização'
-    //                 );
-    //             },
-    //             { timeout: 30000 }
-    //         );
-    //     }
+                    setInitialPosition({
+                        latitude,
+                        longitude,
+                        latitudeDelta,
+                        longitudeDelta,
+                    });
+                },
+                () => {
+                    Alert.alert(
+                        'Erro inesperado ao tentar obter sua localização'
+                    );
+                },
+                { timeout: 30000 }
+            );
+        }
 
-    //     loadPosition();
-    // }, []);
+        loadPosition();
+    }, []);
 
     useEffect(() => {
         async function loadItems() {
@@ -187,7 +187,10 @@ const Points: React.FC = () => {
                                         <MapMarkerImage
                                             resizeMode="cover"
                                             source={{
-                                                uri: point.image,
+                                                uri: point.image_url.replace(
+                                                    'localhost',
+                                                    '10.0.2.2'
+                                                ),
                                             }}
                                         />
                                         <MapMarkerTitle>

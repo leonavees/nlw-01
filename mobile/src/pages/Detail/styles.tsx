@@ -17,7 +17,8 @@ export const PointImage = styled.Image.attrs({
     resizeMode: 'cover',
 })`
     width: 100%;
-    height: 120px;
+    height: 100%;
+    max-height: 200px;
     border-radius: 10px;
     margin-top: 32px;
 `;

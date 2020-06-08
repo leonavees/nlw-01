@@ -59,18 +59,4 @@ module.exports = {
         'import/extensions': [0, { 'tsx': 'never'}],
         'import/no-unresolved': [0, { ignore: ['\.tsx$', '\.png$']}]
     },
-    settings: {
-        // 'import/resolver': {
-        //     'node': {
-        //         'extensions': ['.js', '.jsx', '.ts', '.tsx', 'png']
-        //     },
-        //     'babel-plugin-root-import': {
-        //         rootPathSuffix: 'src',
-        //     },
-        //     typescript: {}
-        // },
-        // 'import/parsers':{
-        //     '@typescript-eslint/parser': ['.ts', '.tsx']
-        // }
-    },
 };
